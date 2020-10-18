@@ -6,7 +6,8 @@ import { User } from '../entity/User';
 export class UserResolver {
   @Query(() => User, { nullable: true })
   async getUser(@Arg('id') id: number): Promise<User | null> {
-    return (await getRepository(User).findOne({ where: { id: id } })) || null;
+    const user = await getRepository(User).findOne({ where: { id } });
+    return user || null;
   }
 
   @Mutation(() => Boolean)

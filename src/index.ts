@@ -4,6 +4,7 @@ import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { UserResolver } from './resolver/user';
 import { buildSchema } from 'type-graphql';
+import { RecipeResolver } from './resolver/recipe';
 
 const main = async () => {
   await createConnection({
@@ -22,7 +23,7 @@ const main = async () => {
 
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver],
+      resolvers: [UserResolver, RecipeResolver],
       validate: false,
     }),
     resolvers: [UserResolver] as any[],
