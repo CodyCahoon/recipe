@@ -1,3 +1,5 @@
+import { registerEnumType } from 'type-graphql';
+
 export enum VolumeUnit {
   Cup = 'Cup',
   Deciliter = 'Deciliter',
@@ -11,3 +13,8 @@ export enum VolumeUnit {
   Tablespoon = 'Tablespoon',
   Teaspoon = 'Teaspoon',
 }
+
+registerEnumType(VolumeUnit, {
+  name: 'VolumeUnit',
+  description: 'Units of volume',
+});

@@ -2,31 +2,17 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { UserResolver } from './resolver/user';
 import { buildSchema } from 'type-graphql';
 import { RecipeResolver } from './resolver/recipe';
 
 const main = async () => {
-  await createConnection({
-    type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'postgres',
-    password: 'postgres',
-    database: 'recipe',
-    synchronize: true,
-    logging: true,
-    entities: ['src/entity/**/*.ts'],
-    migrations: ['src/migration/**/*.ts'],
-    subscribers: ['src/subscriber/**/*.ts'],
-  });
+  await createConnection();
 
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver, RecipeResolver],
+      resolvers: [RecipeResolver],
       validate: false,
     }),
-    resolvers: [UserResolver] as any[],
   });
   const app = express();
 

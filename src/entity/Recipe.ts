@@ -18,6 +18,6 @@ export class Recipe {
   description?: string;
 
   @Field(() => [RecipeIngredient])
-  @OneToMany(() => RecipeIngredient, recipeIngredient => recipeIngredient.recipe)
+  @OneToMany(() => RecipeIngredient, recipeIngredient => recipeIngredient.recipe, { cascade: true })
   recipeIngredients!: RecipeIngredient[];
 }
